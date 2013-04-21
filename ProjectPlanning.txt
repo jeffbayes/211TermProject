@@ -1,0 +1,49 @@
+My goal with this is to create a simulation with the goal being a battle based on the combat principles of Dungeons and Dragons, 4th edition.
+Entities would include a melee-based animate, physical ranged animate (bow and arrow), and wizard animate (magic).
+Each of these will possess inanimate weapons that the animates can interact with, and each of the entities will interact with each other using basic attacks,
+ultimately with the goal of killing the opposing entity. Location objects I could potentially implement are towers, walls, and caves.
+Because of the need to use line of sight as a ranger, a wall or tower between him and their target would prevent the ranger from firing.
+Ultimately, my goal with this is to create a much larger-scale simulation where I could have two factions of mixed warriors, rangers, and wizards fighting.
+
+All of my animates will have a unique move distance, set of attacks (probably two), basic defenses, and a health or hitpoints that are affected by the actions of other animates.
+As according to Dungeons and Dragons (D&D), each of the attacks will require a certain range to attack or be effective, and a random “roll” out of 20 to determine if the
+attacks hit or not. Upon landing, another “roll” (randint) will determine the damage. The weapon of choice by each of the animates will modify both rolls.
+If the attack roll breaks the defender's defenses,  then the attack lands and reduces the defender's hitpoints by the damage roll's amount.
+
+The move distance used by the animates will relate to x and y coordinates, similar to the coordinates used in lab 2. The ranger will probably have the
+greatest move distance because of the stereotypical agility given to rangers. Next will be warriors, and last will be wizards. Distances will also be involved in attacks:
+warriors will require a distance of 1 or 2 to attack, and rangers and wizards will probably have attacks at range 5 or 10. In the event that I get really bored and start
+implementing complicated stuff, I may have a very high range on the ranger's attack, but give a negative penalty to their attack “roll” if they attempt to land it outside
+of their “accurate” range.
+
+I absolutely think this project has the potential to be fleshed out fully to a very complicated and complete program, or implement a very basic version of this to
+satisfy the requirements of the term projects. However, because I have external motivation to make this as complete and thorough as possible, I have high anticipations
+for this project and hope that I will be able to fully create the program as I have it imagined.
+________________________________________________________________________________________________________________________________________________________________________________
+
+The default Character as defined in the class will be a civilian: unarmed, no weapons, and basic stats.
+Each of the individual classes will change stats to fit their respective roles. I am beginning with a singular "defense" stat that can be later expanded into the four defenses:
+Armor Class(AC), Reflexes, Fortitude, and Willpower. Also, the standard "critical hit" has not yet been implemented.
+
+The move function in particular will be a bit tricky to implement. The wizard and ranger don't care how close they are to each other as long as their attacks are in range.
+However, the warrior will want to be as close as possible to its target, and the wizard and ranger will both want to keep their distance from the warrior.
+________________________________________________________________________________________________________________________________________________________________________________
+
+HOUSING OF PSEUDOCODE: I'll be writing Pseudoocode that is not yet ready for implementation here, in order to ensure that I'm continuously making progress.
+
+
+class Character(object):
+    def __init__(self, x, y):
+        self.moveSpeed = 4
+        self.attackMod = 2
+        self.defense = 10
+        self.health = 20
+        self.x = x
+        self.y = y
+
+    def Attack(self):
+        attackRoll = randint(1, 20) + self.attackMod
+
+    def Move(self, x, y):
+        # I need to figure out how to implement this later.
+
