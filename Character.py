@@ -1,4 +1,9 @@
-from random import randint
+from Weapon import *
+from Defenses import *
+from ObserverPattern import *
+
+#=======================================================================================================================
+# Character and Hero Category #
 
 class Character(object):
     def setWeapons(self, arms):
@@ -6,134 +11,105 @@ class Character(object):
 
     def setArmor(self, armor):
         self.armor = armor
-#=======================================================================================================================
 
-class Weapon(object):
-    def weapon(self):
-        pass
+    def announce(self, name):
+        print(name + " is " + self.weapon.display() + " and " + self.armor.display() + ".")
 
-class Unarmed(Weapon):
-    def weapon(self):
-        Hero.attackMod = 0
-        print("INSERTNAME is unarmed!")
-
-class BadWeapon(Weapon):
-    def weapon(self):
-        Hero.attackMod = 3
-        print("INSERTNAME is equipped with a mediocre weapon...")
-
-class AverageWeapon(Weapon):
-    def weapon(self):
-        Hero.attackMod = 4  + (Hero.level // 2)
-        print("INSERTNAME is equipped with a decent weapon.")
-
-class GoodWeapon(Weapon):
-    def weapon(self):
-        Hero.attackMod = 6  + (Hero.level // 2)
-        print("INSERTNAME is equipped with a good weapon.")
-
-class GreatWeapon(Weapon):
-    def weapon(self):
-        Hero.attackMod = 7  + (Hero.level // 2)
-        print("INSERTNAME is equipped with a great weapon.")
-
-class BestWeapon(Weapon):
-    def weapon(self):
-        Hero.attackMod = 9
-        print("INSERTNAME is equipped with the finest weapons seen! A mighty warrior, indeed!")
-
-#=======================================================================================================================
-
-class Defenses(object):
-    def armor(self):
-        pass
-
-class Defenseless(Defenses):
-    def armor(self):
-        self.defense = 10
-        print("INSERTNAME is defenseless!")
-
-class BadArmor(Defenses):
-    def armor(self):
-        self.defense = 13
-        print("INSERTNAME is equipped with mediocre armor...")
-
-class AverageArmor(Defenses):
-    def armor(self):
-        self.defense = 14
-        print("INSERTNAME  is equipped with decent armor.")
-
-class GoodArmor(Defenses):
-    def armor(self):
-        self.defense = 16
-        print("INSERTNAME is equipped with good armor.")
-
-class GreatArmor(Defenses):
-    def armor(self):
-        self.defense = 17
-        print("INSERTNAME is equipped with great armor.")
-
-class BestArmor(Defenses):
-    def armor(self):
-        self.defense = 19
-        print("INSERTNAME is equipped with the finest armor in the land! A mighty warrior, indeed!")
-
-
-#=======================================================================================================================
-
-class Hero(Character):
+class Hero(Character, Observable):
     """
-    The "Character" class shows a basic CIVILIAN or TRAINING DUMMY. If it is an advanced character (e.g. a hero), it will be given traits by the
-    strategy pattern.
+    The "Hero" class shows a basic CIVILIAN or TRAINING DUMMY. If it is an advanced character (e.g. a hero), it will be given traits by the
+    strategy pattern. More classes will be added as I define distances, starting points, etc.
     """
-    def __init__(self, name, level):
-        self.weapon = Unarmed()
-        self.armor = Defenseless()
-        self.health = 20
-        self.damageMod = 0
-        self.name = name
-        self.level = level
-        self.defense = 10
-        self.attackMod = 0
+    global MAX_BASE_HEALTH
+    MAX_BASE_HEALTH = 20
+    def __init__(self, name, level, faction = "FFA"):
+        Observable.__init__(self)
+        self.name = name # character name
+        self.level = level # character level
+        self.faction = faction # for large scale battles later down the road, I want to implement factions as a way of telling friend from foe
+        self.initiative = randint(1, 20) + (self.level // 2)
+        self.weapon = Unarmed() #attack mod of 0 and damage mod of 0 - basic civilian.
+        self.armor = Defenseless() #defenses of 10. simple town clothing.
+        self.health = (MAX_BASE_HEALTH + self.level) # 20 + your level
+        self.maxhealth = (MAX_BASE_HEALTH + self.level) # 20 + your level
+        self.defenses = self.armor.armor() + (self.level // 2) + 10 # armor stats + 1/2 level + base 10
+
+    def getHealth(self):
+        return self.health
 
     def attack(self, target):
-        if target.health <= 0:
-            print(target.name + " is already unconscious! Move to the next target!")
+        if self.faction != "FFA":
+            if target.faction == self.faction:
+                return
+        if self.name == target.name or target.health <= 0:
             return
-        attackRoll = randint(1,20) + self.attackMod
-        if attackRoll >= target.defense:
-            target.health -= (5 + self.damageMod)
+
+        notBloody = None
+        if target.health > (target.maxhealth / 2):
+            notBloody = True
+        atkRoll = self.weapon.attackRoll()
+        dmgRoll = self.weapon.damageRoll()
+        if atkRoll >= target.defenses:
+            target.health -= dmgRoll
+            print(self.name + " strikes " + target.name + ", dealing " + str(dmgRoll) + " damage.")
             if target.health <= 0:
                 print(target.name + " has fallen unconscious!")
+                return
+            if notBloody == True and target.health < (target.maxhealth / 2):
+                target.notifyObservers()
+        else:
+            print(self.name + " cannot penetrate " + target.name + "'s defenses.")
 
 #=======================================================================================================================
 
-"""
-Here is the driver for the program. I'm just creating some generic heroes right now, equipping them, then having one
-hero rip a training dummy to shreds.
-"""
-
 def main():
-    gardakan = Hero("Gardakan", 5)
-    mordak = Hero("Mordak", 7)
-    dummy = Hero("Training Dummy", 1)
+    """
+    Here is the driver for the program. I'm just creating some generic heroes right now, equipping them, then having one
+    hero rip a training dummy to shreds.
+    """
+    characters = []
+    inits = []
+    heroes = []
 
-    mordak.setArmor(BadArmor())
-    mordak.setWeapons(GreatWeapon())
-    gardakan.setArmor(GoodArmor())
-    gardakan.setWeapons(BestWeapon())
 
-    dummy.weapon.weapon()
-    dummy.armor.armor()
-    gardakan.weapon.weapon()
-    gardakan.armor.armor()
 
-    gardakan.attack(dummy)
-    gardakan.attack(dummy)
-    gardakan.attack(dummy)
-    gardakan.attack(dummy)
-    gardakan.attack(dummy)
-    gardakan.attack(dummy)
+    gardakan = Hero("Gardakan", 5, "Red")
+    mordak = Hero("Mordak", 7, "Blue") #Mordak and the dummy are on the same faction, so they cannot attack one another.
+    #dummy = Hero("Training Dummy", 1, "Blue")
+    #dummy.health = 150
+
+
+    # set the weapons and armors of my heroes
+    mordak.setArmor(BestArmor())
+    mordak.setWeapons(BadWeapon())
+    gardakan.setArmor(BestArmor())
+    gardakan.setWeapons(BadWeapon())
+
+    ### ======================================================= ###
+    # this disgustingly long chunk of code is to sort my heroes by their initiative roll.
+    characters.append(gardakan)
+    characters.append(mordak)
+    #characters.append(dummy)
+
+    for hero in characters:
+        inits.append(hero.initiative)
+    inits.sort(reverse = True)
+    for hero in characters:
+        health = HealthObserver(hero)
+        for num in inits:
+            if hero.initiative == num:
+                heroes.append(hero)
+    ### ======================================================= ###
+
+    for hero in heroes:
+        hero.announce(hero.name)
+    print("!!!!! FIGHT !!!!!")
+    while gardakan.health > 0 and mordak.health > 0:
+        for hero in heroes:
+            if gardakan.health > 0 and mordak.health > 0:
+                hero.attack(gardakan)
+                if gardakan.health > 0 and mordak.health > 0:
+                    hero.attack(mordak)
+
 
 main()
-

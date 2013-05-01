@@ -28,22 +28,3 @@ Armor Class(AC), Reflexes, Fortitude, and Willpower. Also, the standard "critica
 The move function in particular will be a bit tricky to implement. The wizard and ranger don't care how close they are to each other as long as their attacks are in range.
 However, the warrior will want to be as close as possible to its target, and the wizard and ranger will both want to keep their distance from the warrior.
 ________________________________________________________________________________________________________________________________________________________________________________
-
-HOUSING OF PSEUDOCODE: I'll be writing Pseudoocode that is not yet ready for implementation here, in order to ensure that I'm continuously making progress.
-
-
-class Character(object):
-    def __init__(self, x, y):
-        self.moveSpeed = 4
-        self.attackMod = 2
-        self.defense = 10
-        self.health = 20
-        self.x = x
-        self.y = y
-
-    def Attack(self):
-        attackRoll = randint(1, 20) + self.attackMod
-
-    def Move(self, x, y):
-        # I need to figure out how to implement this later.
-
