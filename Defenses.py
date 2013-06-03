@@ -15,30 +15,30 @@ class Defenseless(Defenses):
 
 class BadArmor(Defenses):
     def armor(self):
-        return 30
+        return 3
     def display(self):
         return "mediocre armor"
 
 class AverageArmor(Defenses):
     def armor(self):
-        return 40
+        return 4
     def display(self):
         return "decent armor"
 
 class GoodArmor(Defenses):
     def armor(self):
-        return 60
+        return 6
     def display(self):
         return "good armor"
 
 class GreatArmor(Defenses):
     def armor(self):
-        return 70
+        return 7
     def display(self):
         return "great armor"
 
 class BestArmor(Defenses):
     def armor(self):
-        return 90
+        return 9
     def display(self):
         return "the finest armor"

@@ -28,3 +28,8 @@ Armor Class(AC), Reflexes, Fortitude, and Willpower. Also, the standard "critica
 The move function in particular will be a bit tricky to implement. The wizard and ranger don't care how close they are to each other as long as their attacks are in range.
 However, the warrior will want to be as close as possible to its target, and the wizard and ranger will both want to keep their distance from the warrior.
 ________________________________________________________________________________________________________________________________________________________________________________
+
+
+NEW 5/20/2013
+In using the Visitor pattern, we can have the Gods visit our heroes, and give them some sort of buff while they are present. This changes their
+STATE, thus allowing a double dip.
