@@ -1,23 +1,23 @@
-This is the OMGWTF project directory for the cis211 TermProject.
+Term Project for CIS 211
+Jeff Bayes (UOID# 951157141)
 
-At the end of the term, your project will be scored on whether all of the patterns discussed over the term have been implemented in your project.
-We also expect you to push updated code and file a report on the term project at least once a week; these weekly check points are used to demonstrate
-that you are making an effort to work with the course material over the duration of the term. You may push and report as frequently as you like.
+DEPENDENCIES:
+Python 3.3
 
+PATTERN USE:
+STRATEGY: See the Defenses.py and Weapon.py files. I used the strategy pattern to assign the strength of armors and weaponry of my characters.
+            These are set to Unarmed and Defenseless initially, so in order to properly simulate a battle, the driver must assign weaponry and armor to the combatants.
+OBSERVER: See the ObserverPattern.py file. I used it to monitor the health of the opponent and notify the user when the opponent is bloodied (half health remaining).
+            The bloodied notification doesn't do anything (yet), but it could be modified to add more functionality when a character is bloodied.
+DECORATOR: See the Decoration.py file. I used it to decorate the combatants' armor to reflect the faction they're fighting for. Red lacquer for redTeam, blue for blueTeam.
 
-What happens to my report?
-Each morning, all of the reports from all of the students for the previous day are emailed to the 211staff email address.
-If we see items in your report that indicate your project may be running off track, we may respond via email to you.
-We're also reviewing the reports to get a sense of how your work and skills are progressing.
+STATE: See the StatePattern.py file and my attack function in the Character.py file. I used it to make it so each character only had one action per turn. In order to make this work, I cooked in the...
+            VISITOR pattern in the StatePattern.py file, to visit each character and give another action at the end of each round.
 
-If you are having specific problems, you should send email to 211staff rather than expecting us to catch the issue via your report.
-Email will give you a more timely response; we try to respond to all email, we will not be able to respond to all reports due to limited time.
+GENERAL THOUGHTS:
+    The usage for this is to simply run the driver.py file.
 
-
-What happens to my code?
-From time to time, at least once a week, we'll be cloning everyone's project and trying to run the code. We'll be looking at your most recent push,
-with respect to the time we ran the check out. This is good for you because any comments we may email to you will be based on your recent activity
-rather than a week old zip file. We will likely comment infrequently regarding your code on account of limited time.
-
-If there are particular things you'd like us to look at in your code, with respect to design/implementation, a conversation during office hours will
-probably be the most effective strategy. A reasonably good fallback strategy will be to send email to 211staff let us know what in particular you'd like some feedback on.
+While we're on general thoughts, I thought it was very challenging (in a not-good way) to implement all of these patterns into one project. I could understand if there were an
+outline of where to start and some suggestion on how to meaningfully implement the patterns, but both without guidance and with very unique projects across the spectrum,
+it felt like I was bloating my project rather than giving it something new and exciting. I would prefer either tighter guidelines (or at least tighter suggestions) to
+the project, or perhaps breaking the patterns into smaller projects, maybe two patterns per project.

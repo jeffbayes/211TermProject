@@ -1,78 +1,47 @@
-__author__ = 'kent'
-
-import sys
-
-class IceCream(object):
-    BASIC_CALORIES = 200
-
+class ArmorColor(object):
     def __init__(self):
-        self.calories = IceCream.BASIC_CALORIES
+        self.armorColor = None
 
     def describe(self):
-        return "vanilla ice cream"
+        return "The combatant is equipped in armor"
 
-    def getCalories(self):
-        return self.calories
+    def getArmorColor(self):
+        return self.armorColor
 
-class IceCreamDecorator(IceCream):
+class ArmorColorDecorator(ArmorColor):
     def __init__(self, decorated):
-        super(IceCreamDecorator, self).__init__()
+        super(ArmorColorDecorator, self).__init__()
         self.decorated = decorated
 
     def describe(self):
         return self.decorated.describe() + " with "
 
-class NuttyDecorator(IceCreamDecorator):
-    NUTS_CALORIES = 100
-
+class RedArmor(ArmorColorDecorator):
     def __init__(self, decorated):
-        super(NuttyDecorator, self).__init__(decorated)
-        self.calories = self.decorated.calories + NuttyDecorator.NUTS_CALORIES
+        super(RedArmor, self).__init__(decorated)
 
     def describe(self):
-         return super(NuttyDecorator, self).describe() + "Nuts"
+         return super(RedArmor, self).describe() + "red lacquer."
 
 
-class HoneyDecorator(IceCreamDecorator):
-    HONEY_CALORIES = 150
-
+class BlueArmor(ArmorColorDecorator):
     def __init__(self, decorated):
-        super(HoneyDecorator, self).__init__(decorated)
-        self.calories = self.decorated.calories + HoneyDecorator.HONEY_CALORIES
+        super(BlueArmor, self).__init__(decorated)
 
     def describe(self):
-       return super(HoneyDecorator, self).describe() + "Honey"
+       return super(BlueArmor, self).describe() + "blue lacquer."
 
 
-class SpamDecorator(IceCreamDecorator):
-    SPAM_CALORIES = 20
-
+class GreenArmor(ArmorColorDecorator):
     def __init__(self, decorated):
-        super(SpamDecorator, self).__init__(decorated)
-        self.calories = self.decorated.calories + SpamDecorator.SPAM_CALORIES
+        super(GreenArmor, self).__init__(decorated)
 
     def describe(self):
-        return super(SpamDecorator, self).describe() + "Spam"
+        return super(GreenArmor, self).describe() + "green lacquer."
 
-#===============================================================================
+class NormalArmor(ArmorColorDecorator):
+    def __init__(self, decorated):
+        super(NormalArmor, self).__init__(decorated)
 
-simpleDessert = IceCream()
-print ("simple desert: " + simpleDessert.describe())
-print ("calories = " + str(simpleDessert.getCalories()))
-
-dessert1 = NuttyDecorator(simpleDessert)
-print ("desert1: " + dessert1.describe())
-print ("calories = " + str(dessert1.getCalories()))
-
-#dessert2 = HoneyDecorator(NuttyDecorator(IceCream()))
-dessert2 = HoneyDecorator(NuttyDecorator(simpleDessert))
-print ("desert2: " + dessert2.describe())
-print ("calories = " + str(dessert2.getCalories()))
-
-dessert3 = NuttyDecorator(HoneyDecorator(IceCream()))
-print ("desert3: " + dessert3.describe())
-print ("calories = " + str(dessert3.getCalories()))
-
-dessert4 = SpamDecorator(SpamDecorator(SpamDecorator(IceCream())))
-print ("desert4: " + dessert4.describe())
-print ("calories = " + str(dessert4.getCalories()))
+    def describe(self):
+        return super(NormalArmor, self).describe() + "no lacquer."
