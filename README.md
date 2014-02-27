@@ -25,7 +25,7 @@ DECORATOR: See the Decoration.py file. I used it to decorate the combatants' arm
 
 STATE: See the StatePattern.py file and my attack function in the Character.py file. I used it to make it so each character only had one action per turn. In order to make this work, I cooked in the...
 
-            VISITOR pattern in the StatePattern.py file, to visit each character and give another action at the end of each round.
+VISITOR: See the StatePattern.py file. Visits each character and give another action at the end of each round.
 
 
 GENERAL THOUGHTS:
