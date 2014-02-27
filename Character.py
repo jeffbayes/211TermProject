@@ -37,7 +37,6 @@ class Hero(Character, ArmorColor):
     The "Hero" class shows a basic CIVILIAN or TRAINING DUMMY. If it is an advanced character (e.g. a hero), it will be given traits by the
     strategy pattern. More classes will be added as I define distances, starting points, etc.
     """
-    # what if I put a while loop in the main() function, where the state pattern will hand the turn off to the next person.
     def __init__(self, name, level, faction = "FFA"):
         self.name = name # character name
         self.level = level # character level

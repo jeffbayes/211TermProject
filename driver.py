@@ -1,3 +1,8 @@
+"""
+Author: Jeff Bayes
+Class: CIS 211
+"""
+
 from Character import *
 
 def main():
