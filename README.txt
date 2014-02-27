@@ -2,9 +2,6 @@ Term Project for CIS 211
 Jeff Bayes
 
 
-For Mr. Burke:
-This is both an example that I understand Python, Object-Oriented Programming, and design patterns.
-
 Just as fair warning, I'm quite aware that this project is a bit bloated. We were told to use every design pattern
 we learned in this class in one project, and as the term went on the designs became less and less useful for my
 final goal: a battle simulator. I can think of a few things I would do now, such as asking for input to create the 
