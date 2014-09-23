@@ -28,10 +28,4 @@ STATE: See the StatePattern.py file and my attack function in the Character.py f
 VISITOR: See the StatePattern.py file. Visits each character and give another action at the end of each round.
 
 
-GENERAL THOUGHTS:
-    The usage for this is to simply run the driver.py file.
-
-While we're on general thoughts, I thought it was very challenging (in a not-good way) to implement all of these patterns into one project. I could understand if there were an
-outline of where to start and some suggestion on how to meaningfully implement the patterns, but both without guidance and with very unique projects across the spectrum,
-it felt like I was bloating my project rather than giving it something new and exciting. I would prefer either tighter guidelines (or at least tighter suggestions) to
-the project, or perhaps breaking the patterns into smaller projects, maybe two patterns per project.
+The usage for this is to simply run the driver.py file.
